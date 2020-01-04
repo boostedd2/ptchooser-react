@@ -18,7 +18,7 @@ const Navbar = () => {
       <AppBar position="static" style={{backgroundColor: "#212121"}}>
         <Toolbar>
           <Navdrawer />
-          <h2>PTChooser</h2>
+          <h2 style={{color: "#b32eae"}}>PTChooser</h2>
         </Toolbar>
       </AppBar>
     </div>

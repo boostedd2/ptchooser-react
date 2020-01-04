@@ -7,9 +7,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
 
 const useStyles = makeStyles({
   list: {
@@ -18,6 +15,12 @@ const useStyles = makeStyles({
   fullList: {
     width: 'auto',
   },
+  paper: {
+    background: "#212121"
+  },
+  navItem: {
+    color: "white",
+  }
 });
 
 
@@ -43,29 +46,39 @@ const Navdrawer = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <h2 style={{textAlign: "center", color: "#b32eae"}}>PTChooser</h2>
+        <ListItem button className={classes.navItem}>
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary="Stacks" />
+        </ListItem>
+        <ListItem button className={classes.navItem}>
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary="Submit Stack" />
+        </ListItem>
+        <ListItem button className={classes.navItem}>
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary="What is this?" />
+        </ListItem>
+        <Divider />
+        <ListItem button className={classes.navItem}>
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary="Login" />
+        </ListItem>
+        <ListItem button className={classes.navItem}>
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary="Sign Up" />
+        </ListItem>
       </List>
     </div>
   );
 
   return (
     <div>
-      <Button style={{color: "white"}}onClick={toggleDrawer('left', true)}>[+]</Button>
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+      <Button style={{color: "lightgreen"}}onClick={toggleDrawer('left', true)}>[MENU]</Button>
+      <Drawer 
+      open={state.left}
+      onClose={toggleDrawer('left', false)}
+      classes={{ paper: classes.paper }}>
         {sideList('left')}
       </Drawer>
     </div>
