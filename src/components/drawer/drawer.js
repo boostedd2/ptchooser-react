@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
@@ -46,28 +47,30 @@ const Navdrawer = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <h2 style={{textAlign: "center", color: "#b32eae"}}>PTChooser</h2>
-        <ListItem button className={classes.navItem}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Stacks" />
-        </ListItem>
-        <ListItem button className={classes.navItem}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Submit Stack" />
-        </ListItem>
-        <ListItem button className={classes.navItem}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="What is this?" />
-        </ListItem>
-        <Divider />
-        <ListItem button className={classes.navItem}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Login" />
-        </ListItem>
-        <ListItem button className={classes.navItem}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Sign Up" />
-        </ListItem>
+        <BrowserRouter>
+          <h2 style={{textAlign: "center", color: "#b32eae"}}>PTChooser</h2>
+          <ListItem component={Link} to="/" button className={classes.navItem}>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Stacks" />
+          </ListItem>
+          <ListItem button className={classes.navItem}>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Submit Stack" />
+          </ListItem>
+          <ListItem component={Link} to="/about" button className={classes.navItem}>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="What is this?" />
+          </ListItem>
+          <Divider />
+          <ListItem button className={classes.navItem}>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Login" />
+          </ListItem>
+          <ListItem button className={classes.navItem}>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Sign Up" />
+          </ListItem>
+        </BrowserRouter>
       </List>
     </div>
   );
