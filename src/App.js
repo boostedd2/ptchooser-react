@@ -7,8 +7,8 @@ import About from './components/about/about'
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={StackList} />
           <Route path="/about" component={About} />

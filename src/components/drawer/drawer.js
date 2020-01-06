@@ -47,7 +47,6 @@ const Navdrawer = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <BrowserRouter>
           <h2 style={{textAlign: "center", color: "#b32eae"}}>PTChooser</h2>
           <ListItem component={Link} to="/" button className={classes.navItem}>
             <ListItemIcon></ListItemIcon>
@@ -70,7 +69,6 @@ const Navdrawer = () => {
             <ListItemIcon></ListItemIcon>
             <ListItemText primary="Sign Up" />
           </ListItem>
-        </BrowserRouter>
       </List>
     </div>
   );
