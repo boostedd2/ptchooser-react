@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
@@ -52,7 +52,7 @@ const Navdrawer = () => {
             <ListItemIcon></ListItemIcon>
             <ListItemText primary="Stacks" />
           </ListItem>
-          <ListItem button className={classes.navItem}>
+          <ListItem component={Link} to="/add" button className={classes.navItem}>
             <ListItemIcon></ListItemIcon>
             <ListItemText primary="Submit Stack" />
           </ListItem>
@@ -61,11 +61,11 @@ const Navdrawer = () => {
             <ListItemText primary="What is this?" />
           </ListItem>
           <Divider />
-          <ListItem button className={classes.navItem}>
+          <ListItem component={Link} to="/login" button className={classes.navItem}>
             <ListItemIcon></ListItemIcon>
             <ListItemText primary="Login" />
           </ListItem>
-          <ListItem button className={classes.navItem}>
+          <ListItem component={Link} to="/register" button className={classes.navItem}>
             <ListItemIcon></ListItemIcon>
             <ListItemText primary="Sign Up" />
           </ListItem>
