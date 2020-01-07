@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -43,11 +44,24 @@ const useStyles = makeStyles({
 
 const StackList = () => {
   const classes = useStyles();
+  const [displayPosts, setDisplayPosts] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(async () => {
+    const fetchData = async () => {
+      const result = await axios(
+        'http://localhost:8000/stacks'
+      );
+        setDisplayPosts(result.data)
+        setIsLoading(false)
+    };
+    fetchData();
+  }, []);
 
   return(
     <div className={classes.root}>
       <div className={classes.container}>
-        {dummy.map(item => 
+        {displayPosts.map(item => 
           <Card className={classes.card}>
             <CardContent>
               <h2 className={classes.title}>{item.name}</h2>
@@ -55,7 +69,7 @@ const StackList = () => {
               <p className={classes.desc}>By {item.author}</p>
             </CardContent>
             <CardActions>
-              <Button size="small" style= {{color: "white"}}>View Weapon Stack</Button>
+              <Button size="small" style= {{color:"white"}}>View Weapon Stack</Button>
             </CardActions>
           </Card>
         )}

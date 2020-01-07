@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './components/navbar/navbar';
 import StackList from './components/stack_list/stackList'
@@ -8,6 +8,8 @@ import Login from './components/login/login'
 import Register from './components/register/register'
 
 function App() {
+  const [stackList, setStackList] = useState(0)
+  
   return (
     <div className="App">
       <BrowserRouter>
