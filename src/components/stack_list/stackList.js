@@ -5,13 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import dummy from '../../dummy'
-
-const production = false
-
-if (production === true) {
-  dummy = 1//api response
-}
+import dummy from '../../dummy';
 
 const useStyles = makeStyles({
   root: {
@@ -44,10 +38,10 @@ const useStyles = makeStyles({
 
 const StackList = () => {
   const classes = useStyles();
-  const [displayPosts, setDisplayPosts] = useState([])
+  const [displayPosts, setDisplayPosts] = useState(dummy)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(async () => {
+  /*useEffect(async () => {
     const fetchData = async () => {
       const result = await axios(
         'http://localhost:8000/stacks'
@@ -57,6 +51,7 @@ const StackList = () => {
     };
     fetchData();
   }, []);
+  */
 
   return(
     <div className={classes.root}>
