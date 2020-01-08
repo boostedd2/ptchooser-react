@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
 
 const CssTextField = withStyles({
   root: {
+    '& label': {
+      color: 'white',
+    },
     '& label.Mui-focused': {
       color: 'white',
     },
