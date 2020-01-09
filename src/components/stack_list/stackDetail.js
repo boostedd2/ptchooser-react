@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -105,6 +105,18 @@ const egg = {
 
 const StackDetail = () => {
   const classes = useStyles();
+
+  useEffect(() => {
+    const fetchData = () => {
+      axios.get(
+        'http://192.168.1.17:8000/stacks'
+      ).then(res => {
+        setDisplayPosts(res.data)
+        setIsLoading(false)
+      })
+    };
+    fetchData();
+  }, []);
 
   return(
     <div className={classes.root}>

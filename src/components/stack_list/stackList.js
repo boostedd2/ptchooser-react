@@ -41,20 +41,21 @@ const useStyles = makeStyles({
 
 const StackList = () => {
   const classes = useStyles();
-  const [displayPosts, setDisplayPosts] = useState(dummy)
+  const [displayPosts, setDisplayPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  /*useEffect(async () => {
-    const fetchData = async () => {
-      const result = await axios(
-        'http://localhost:8000/stacks'
-      );
-        setDisplayPosts(result.data)
+  useEffect(() => {
+    const fetchData = () => {
+      axios.get(
+        'http://192.168.1.17:8000/stacks'
+      ).then(res => {
+        setDisplayPosts(res.data)
         setIsLoading(false)
+      })
     };
     fetchData();
   }, []);
-  */
+  
 
   return(
     <div className={classes.root}>
@@ -65,11 +66,10 @@ const StackList = () => {
             <Card className={classes.card}>
               <CardContent>
                 <h2 className={classes.title}>{item.name}</h2>
-                <p className={classes.desc}>This is a user submitted stack.</p>
                 <p className={classes.desc}>By {item.author}</p>
               </CardContent>
               <CardActions>
-                <Button component={Link} to="stacks/test" size="small" style= {{color:"white"}}>View Weapon Stack</Button>
+                <Button component={Link} to={"stacks/" + item.slug} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
               </CardActions>
             </Card>
           </Slide>
