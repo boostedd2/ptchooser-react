@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: "80px",
     color: "white",
   }
 });

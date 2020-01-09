@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return(
     <div className={classes.root}>
-      <AppBar position="static" style={{backgroundColor: "#212121"}}>
+      <AppBar position="fixed" style={{backgroundColor: "#212121",}}>
         <Toolbar>
           <Navdrawer />
           <h2 style={{color: "#b32eae"}}>PTChooser</h2>

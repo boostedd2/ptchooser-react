@@ -6,6 +6,7 @@ import SubmitStack from './components/submit_stack/submitStack'
 import About from './components/about/about'
 import Login from './components/login/login'
 import Register from './components/register/register'
+import StackDetail from './components/stack_list/stackDetail';
 
 function App() {
   const [stackList, setStackList] = useState(0)
@@ -16,6 +17,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={StackList} />
+          <Route path="/stacks/:detail" component={StackDetail} />
           <Route path="/add" component={SubmitStack} />
           <Route path="/about" component={About} />
           <Route path="/login" component={Login} />

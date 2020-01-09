@@ -6,13 +6,15 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Slide from '@material-ui/core/Slide';
 import weps from '../../allWeapons';
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: "90%",
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
+    marginTop: "80px"
   },
   container: {
     color: "white",
@@ -78,20 +80,22 @@ const SubmitStack = () => {
         <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" />
         <Button size="small" style= {{color:"white", background: "#b32eae", marginLeft: "20px", padding: "16px"}}>Submit Weapon Stack</Button>
         <div className={classes.container}>
-          {weps.map(item => 
-            <Card className={classes.card}>
-              <CardMedia
-                className={classes.media}
-                image={item.img_url}
-                title={item.name}
-              />
-              <CardContent>
-                <h2 className={classes.title}>{item.name}</h2>
-              </CardContent>
-              <CardActions>
-                <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}}>Disable Weapon</Button>
-              </CardActions>
-            </Card>
+          {weps.map(item =>
+            <Slide direction="up" in={true} timeout={800}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.media}
+                  image={item.img_url}
+                  title={item.name}
+                />
+                <CardContent>
+                  <h2 className={classes.title}>{item.name}</h2>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}}>Disable Weapon</Button>
+                </CardActions>
+              </Card>
+            </Slide>
           )}
         </div>
       </div>
