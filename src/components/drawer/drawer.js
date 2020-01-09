@@ -8,6 +8,16 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import MenuIcon from '@material-ui/icons/Menu';
+import AppsIcon from '@material-ui/icons/Apps';
+import HelpIcon from '@material-ui/icons/Help';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AddIcon from '@material-ui/icons/Add';
+import HowToRegIcon from '@material-ui/icons/HowToReg';
+
+
+
+
 
 const useStyles = makeStyles({
   list: {
@@ -47,26 +57,26 @@ const Navdrawer = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-          <h2 style={{textAlign: "center", color: "#b32eae"}}>PTChooser</h2>
+          <h2 style={{marginLeft: "15px", color: "#b32eae"}}>PTChooser</h2>
           <ListItem component={Link} to="/" button className={classes.navItem}>
-            <ListItemIcon></ListItemIcon>
+            <ListItemIcon style={{color: "white"}}><AppsIcon /></ListItemIcon>
             <ListItemText primary="Stacks" />
           </ListItem>
           <ListItem component={Link} to="/add" button className={classes.navItem}>
-            <ListItemIcon></ListItemIcon>
+            <ListItemIcon style={{color: "white"}}><AddIcon /></ListItemIcon>
             <ListItemText primary="Submit Stack" />
           </ListItem>
           <ListItem component={Link} to="/about" button className={classes.navItem}>
-            <ListItemIcon></ListItemIcon>
+            <ListItemIcon style={{color: "white"}}><HelpIcon /></ListItemIcon>
             <ListItemText primary="What is this?" />
           </ListItem>
           <Divider />
           <ListItem component={Link} to="/login" button className={classes.navItem}>
-            <ListItemIcon></ListItemIcon>
+            <ListItemIcon style={{color: "white"}}><AccountCircleIcon /></ListItemIcon>
             <ListItemText primary="Login" />
           </ListItem>
           <ListItem component={Link} to="/register" button className={classes.navItem}>
-            <ListItemIcon></ListItemIcon>
+            <ListItemIcon style={{color: "white"}}><HowToRegIcon /></ListItemIcon>
             <ListItemText primary="Sign Up" />
           </ListItem>
       </List>
@@ -75,7 +85,7 @@ const Navdrawer = () => {
 
   return (
     <div>
-      <Button style={{color: "lightgreen"}}onClick={toggleDrawer('left', true)}>[MENU]</Button>
+      <Button style={{color: "lightgreen"}}onClick={toggleDrawer('left', true)}><MenuIcon /></Button>
       <Drawer 
       open={state.left}
       onClose={toggleDrawer('left', false)}

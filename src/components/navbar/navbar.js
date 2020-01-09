@@ -1,13 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
 import Navdrawer from '../drawer/drawer'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
+  navbarItems: {
+    display: "flex",
+    alignItems: "center",
+  },
+  home: {
+    backgroundColor: "#212121",
+    color:"#b32eae",
+    textDecoration: "none",
+    '&:focus': {
+      outline: 0
+    }
+  },
+
 }));
 
 const Navbar = () => {
@@ -16,10 +29,10 @@ const Navbar = () => {
   return(
     <div className={classes.root}>
       <AppBar position="fixed" style={{backgroundColor: "#212121",}}>
-        <Toolbar>
+        <div className={classes.navbarItems}>
           <Navdrawer />
-          <h2 style={{color: "#b32eae"}}>PTChooser</h2>
-        </Toolbar>
+          <Link to="/" className={classes.home}><h2>PTChooser</h2></Link>
+        </div>
       </AppBar>
     </div>
   )
