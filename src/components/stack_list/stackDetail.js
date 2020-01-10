@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -103,27 +104,31 @@ const egg = {
   ]
 }
 
-const StackDetail = () => {
+const StackDetail = (props) => {
   const classes = useStyles();
+  const [displayPosts, setDisplayPosts] = useState([])
+  const [description, setDescription] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = () => {
       axios.get(
-        'http://192.168.1.17:8000/stacks'
+        'http://192.168.1.17:8000/stacks/' + props.match.params.detail
       ).then(res => {
-        setDisplayPosts(res.data)
+        setDisplayPosts(res.data.weapons)
+        setDescription(res.data)
         setIsLoading(false)
       })
     };
     fetchData();
-  }, []);
+  }, [props.match.params.detail]);
 
   return(
     <div className={classes.root}>
-      <h1>{egg.name}</h1>
-      <h4 style={{marginTop: "-20px"}}>by {egg.author}</h4>
+      <h1>{description.name}</h1>
+      <h4 style={{marginTop: "-20px"}}>by {description.author}</h4>
       <div className={classes.container}>
-      {egg.weapons.map(item =>
+      {displayPosts.map(item =>
             <Slide direction="up" in={true} timeout={800}>
               <Card className={classes.card}>
                 <CardMedia

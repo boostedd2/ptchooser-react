@@ -17,13 +17,11 @@ const useStyles = makeStyles(theme => ({
     marginTop: "80px"
   },
   container: {
-    color: "white",
-  },
-  container: {
     width: "100%",
     marginTop: "40px",
     display: "flex",
     flexWrap: "wrap",
+    color: "white",
   },
   card: {
     flex: "20%",
