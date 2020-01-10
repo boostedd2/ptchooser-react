@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import slugify from 'slugify';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -69,7 +70,7 @@ const StackList = () => {
                 <p className={classes.desc}>By {item.author}</p>
               </CardContent>
               <CardActions>
-                <Button component={Link} to={"stacks/" + item.slug} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
+                <Button component={Link} to={"stacks/" + slugify(item.slug)} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
               </CardActions>
             </Card>
           </Slide>

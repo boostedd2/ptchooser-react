@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
+import Switch from '@material-ui/core/Switch';
 import weps from '../../allWeapons';
 
 const useStyles = makeStyles(theme => ({
@@ -71,12 +72,26 @@ const CssTextField = withStyles({
 
 const SubmitStack = () => {
   const classes = useStyles();
+  const [state, setState] = useState({
+    checkedA: false,
+  });
+
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.checked });
+  };
   
   return(
       <div className={classes.root}>
         <h1 style={{color: "white"}}>Create Stack</h1>
         <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" />
         <Button size="small" style= {{color:"white", background: "#b32eae", marginLeft: "20px", padding: "16px"}}>Submit Weapon Stack</Button>
+        <p style={{color: "white"}}>Show Disabled</p>
+        <Switch
+        checked={state.checkedA}
+        onChange={handleChange('checkedA')}
+        value="checkedA"
+        inputProps={{ 'aria-label': 'secondary checkbox' }}
+        />
         <div className={classes.container}>
           {weps.map(item =>
             <Slide direction="up" in={true} timeout={800}>
