@@ -126,7 +126,6 @@ const StackDetail = (props) => {
   return(
     <div className={classes.root}>
       <h1>{description.name}</h1>
-      <h4 style={{marginTop: "-20px"}}>by {description.author}</h4>
       <div className={classes.container}>
       {displayPosts.map(item =>
             <Slide direction="up" in={true} timeout={800}>

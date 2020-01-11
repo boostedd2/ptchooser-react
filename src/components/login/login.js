@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,6 +53,7 @@ const Login = () => {
         label="Username"
         variant="filled" />
       <CssTextField className={classes.entryField} id="filled-basic" label="Password" variant="filled" />
+      <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px", width: "80px"}}>Login</Button>
       </form>
     </div>
   )

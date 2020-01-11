@@ -67,7 +67,6 @@ const StackList = () => {
             <Card className={classes.card}>
               <CardContent>
                 <h2 className={classes.title}>{item.name}</h2>
-                <p className={classes.desc}>By {item.author}</p>
               </CardContent>
               <CardActions>
                 <Button component={Link} to={"stacks/" + slugify(item.slug)} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
