@@ -80,6 +80,7 @@ const CssTextField = withStyles({
 const SubmitStack = () => {
   const classes = useStyles();
   const [displayWeapons, setDisplayWeapons] = useState([])
+  const [disabledWeapons, setDisabledWeapons] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [state, setState] = useState({
     checkedA: false,
@@ -100,22 +101,45 @@ const SubmitStack = () => {
     };
     fetchData();
   }, []);
+
+  const onDisable = (id) => {
+    const isNotId = item => item.weap_id !== id;
+    const isId = item => item.weap_id == id
+    const updatedList = displayWeapons.filter(isNotId);
+    const disabledItem = displayWeapons.filter(isId)[0];
+    setDisabledWeapons([...disabledWeapons, disabledItem]);
+    setDisplayWeapons(updatedList)
+  }
+
+  const filtered = () => {
+    if (state.checkedA === true) {
+      return disabledWeapons
+    } else {
+      return displayWeapons
+    }
+  }
+
+  const submit = () => {
+    console.log(filtered())
+  }
   
   return(
       <div className={classes.root}>
         <h1 style={{color: "white"}}>Create Stack</h1>
+        <h3 style={{color: "white",}}>You can submit the the negative list too.</h3>
         <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" />
-        <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px"}}>Submit Weapon Stack</Button>
-        <p style={{color: "white"}}>Show Disabled Weapons</p>
+        <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px"}} onClick={() => submit()}>Submit Weapon Stack</Button>
+        <p style={{color: "white"}}>Show Negative List</p>
         <Switch
         checked={state.checkedA}
         onChange={handleChange('checkedA')}
         value="checkedA"
         inputProps={{ 'aria-label': 'secondary checkbox' }}
         />
+        <span style={{color: "white",}}>{filtered().length} Weapons selected</span>
         <div className={classes.container}>
-          {isLoading ? <div className={classes.loading}><Loading /></div> : displayWeapons.map(item =>
-            <Slide direction="up" in={true} timeout={800}>
+          {isLoading ? <div className={classes.loading}><Loading /></div> : filtered().map(item =>
+            <Slide direction="up" in={true} timeout={800} key={item.weap_id}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.media}
@@ -126,7 +150,8 @@ const SubmitStack = () => {
                   <h2 className={classes.title}>{item.name}</h2>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}}>Disable Weapon</Button>
+                  {filtered() !== disabledWeapons ? <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Disable Weapon</Button> :
+                                                    <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Undo</Button>}
                 </CardActions>
               </Card>
             </Slide>
