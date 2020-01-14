@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Slide from '@material-ui/core/Slide';
+import Loading from '../misc/loading';
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +41,11 @@ const useStyles = makeStyles({
     color: "white",
     textAlign: "center"
   },
+  loading: {
+    marginTop: "40px",
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
 });
 
 const StackDetail = (props) => {
@@ -65,7 +71,8 @@ const StackDetail = (props) => {
     <div className={classes.root}>
       <h1>{description.name}</h1>
       <div className={classes.container}>
-      {displayPosts.map(item =>
+      {isLoading ?
+      <div className={classes.loading}><Loading /></div> : displayPosts.map(item =>
             <Slide direction="up" in={true} timeout={800}>
               <Card className={classes.card} raised={true}>
                 <CardMedia

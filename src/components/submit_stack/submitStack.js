@@ -104,6 +104,19 @@ const SubmitStack = () => {
     fetchData();
   }, []);
 
+  const sendStack = () => {
+    const postData = {
+      "name": stackName,
+      "weapons": filtered()
+    }
+    axios.post(
+      'http://192.168.1.17:8000/stacks', postData
+    ).then(res => {
+      console.log(res.data)
+    })
+  };
+  
+
   const onDisable = (id) => {
     const isNotId = item => item.weap_id !== id;
     const isId = item => item.weap_id === id
@@ -124,21 +137,13 @@ const SubmitStack = () => {
  const inputChange = function(event) {
     setStackName(event.target.value);
   }
-
-  const submit = () => {
-    const postData = {
-      "name": stackName,
-      "weapons": filtered()
-    }
-    console.log(postData)
-  }
   
   return(
       <div className={classes.root}>
         <h1 style={{color: "white"}}>Create Stack</h1>
         <h3 style={{color: "white",}}>You can submit the the negative list too.</h3>
         <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" defaultValue={stackName} onBlur={inputChange}/>
-        <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px"}} onClick={() => submit()}>Submit Weapon Stack</Button>
+        <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px"}} onClick={() => sendStack()}>Submit Weapon Stack</Button>
         <p style={{color: "white"}}>Toggle Negative List</p>
         <Switch
         checked={state.checkedA}

@@ -31,7 +31,7 @@ const Navbar = () => {
       <AppBar position="fixed" style={{backgroundColor: "#212121",}}>
         <div className={classes.navbarItems}>
           <Navdrawer />
-          <Link to="/" className={classes.home}><h2>PTChooser</h2></Link>
+          <Link to="/" className={classes.home}><h2>PocketStacks</h2></Link>
         </div>
       </AppBar>
     </div>

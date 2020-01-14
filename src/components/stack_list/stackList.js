@@ -37,6 +37,12 @@ const useStyles = makeStyles({
   desc: {
     color: "white",
   },
+  loading: {
+    marginTop: "40px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    color: "white",
+  }
 });
 
 

@@ -57,7 +57,7 @@ const Navdrawer = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-          <h2 style={{marginLeft: "15px", color: "#b32eae"}}>PTChooser</h2>
+          <h2 style={{marginLeft: "15px", color: "#b32eae"}}>PocketStacks</h2>
           <ListItem component={Link} to="/" button className={classes.navItem}>
             <ListItemIcon style={{color: "white"}}><AppsIcon /></ListItemIcon>
             <ListItemText primary="Stacks" />

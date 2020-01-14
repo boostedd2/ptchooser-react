@@ -11,6 +11,17 @@ const useStyles = makeStyles(theme => ({
     },
     text: {
         fontSize: "36px",
+    },
+    loading: {
+        animation: "$rotation 1s infinite linear",
+    },
+    '@keyframes rotation': {
+        from: {
+            transform: "rotate(359deg)"
+          },
+          to: {
+            transform: "rotate(0deg)"
+          }
     }
 }));
 
@@ -20,7 +31,7 @@ const Loading = () => {
     return(
         <div className={classes.root}>
             <div className={classes.text}>Loading</div>
-            <div><CachedIcon fontSize="large" /></div>
+            <div className={classes.loading}><CachedIcon fontSize="large" /></div>
         </div>
     )
 }
