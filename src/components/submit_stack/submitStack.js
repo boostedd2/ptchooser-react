@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
   card: {
     flex: "20%",
     minWidth: "200px",
-    backgroundColor: "#212121",
+    backgroundColor: "#2e2e2e",
+    border: "none",
     marginLeft: "10px",
     marginRight: "10px",
     marginBottom: "20px",
@@ -81,6 +82,7 @@ const SubmitStack = () => {
   const classes = useStyles();
   const [displayWeapons, setDisplayWeapons] = useState([])
   const [disabledWeapons, setDisabledWeapons] = useState([])
+  const [stackName, setStackName] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [state, setState] = useState({
     checkedA: false,
@@ -104,7 +106,7 @@ const SubmitStack = () => {
 
   const onDisable = (id) => {
     const isNotId = item => item.weap_id !== id;
-    const isId = item => item.weap_id == id
+    const isId = item => item.weap_id === id
     const updatedList = displayWeapons.filter(isNotId);
     const disabledItem = displayWeapons.filter(isId)[0];
     setDisabledWeapons([...disabledWeapons, disabledItem]);
@@ -113,23 +115,31 @@ const SubmitStack = () => {
 
   const filtered = () => {
     if (state.checkedA === true) {
-      return disabledWeapons
+      return disabledWeapons.sort(function(a, b){return a.weap_id - b.weap_id});
     } else {
       return displayWeapons
     }
   }
 
+ const inputChange = function(event) {
+    setStackName(event.target.value);
+  }
+
   const submit = () => {
-    console.log(filtered())
+    const postData = {
+      "name": stackName,
+      "weapons": filtered()
+    }
+    console.log(postData)
   }
   
   return(
       <div className={classes.root}>
         <h1 style={{color: "white"}}>Create Stack</h1>
         <h3 style={{color: "white",}}>You can submit the the negative list too.</h3>
-        <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" />
+        <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" defaultValue={stackName} onBlur={inputChange}/>
         <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px"}} onClick={() => submit()}>Submit Weapon Stack</Button>
-        <p style={{color: "white"}}>Show Negative List</p>
+        <p style={{color: "white"}}>Toggle Negative List</p>
         <Switch
         checked={state.checkedA}
         onChange={handleChange('checkedA')}
@@ -138,9 +148,10 @@ const SubmitStack = () => {
         />
         <span style={{color: "white",}}>{filtered().length} Weapons selected</span>
         <div className={classes.container}>
-          {isLoading ? <div className={classes.loading}><Loading /></div> : filtered().map(item =>
+          {isLoading ? 
+          <div className={classes.loading}><Loading /></div> : filtered().map(item =>
             <Slide direction="up" in={true} timeout={800} key={item.weap_id}>
-              <Card className={classes.card}>
+              <Card className={classes.card} raised={true}>
                 <CardMedia
                   className={classes.media}
                   image={item.img_url}
@@ -150,8 +161,9 @@ const SubmitStack = () => {
                   <h2 className={classes.title}>{item.name}</h2>
                 </CardContent>
                 <CardActions>
-                  {filtered() !== disabledWeapons ? <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Disable Weapon</Button> :
-                                                    <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Undo</Button>}
+                  {filtered() !== disabledWeapons ? 
+                    <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Disable</Button> :
+                    <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Enable</Button>}
                 </CardActions>
               </Card>
             </Slide>

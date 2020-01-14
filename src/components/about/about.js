@@ -21,6 +21,7 @@ const About = () => {
       <p></p>
       <h1>How Does it work?</h1>
       <p>Everyone is able to see the stacks that other users have created. This provides a list of weapons to enable or disable in-game depending on what the creator specified.</p>
+      <p>You can submit the list of weapons in the normal list or the negative list, this makes it easier to make a stack based on your preferences.</p>
       <p>You must be logged in to create a stack and share it with others.</p>
       <p>Hoping this makes some fun matches for our players.</p>
       <h1>Why?</h1>

@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   card: {
     flex: "20%",
     minWidth: "200px",
-    backgroundColor: "#212121",
+    backgroundColor: "#2e2e2e",
     marginLeft: "10px",
     marginRight: "10px",
     marginBottom: "20px",
@@ -41,68 +41,6 @@ const useStyles = makeStyles({
     textAlign: "center"
   },
 });
-
-const egg = {
-  "name": "eLEMONation",
-  "author": "lmoney",
-  "weapons": [
-    {
-      "weap_id": 1,
-      "name": "Single Shot",
-      "img_url": "http://192.168.1.17:8000/images/1.gif"
-    },
-    {
-      "weap_id": 2,
-      "name": "Big Shot",
-      "img_url": "http://192.168.1.17:8000/images/2.gif"
-    },
-    {
-      "weap_id": 3,
-      "name": "3 Shot",
-      "img_url": "http://192.168.1.17:8000/images/3.gif"
-    },
-    {
-      "weap_id": 11,
-      "name": "Spider",
-      "img_url": "http://192.168.1.17:8000/images/11.gif"
-    },
-    {
-      "weap_id": 12,
-      "name": "Sniper Rifle",
-      "img_url": "http://192.168.1.17:8000/images/12.gif"
-    },
-    {
-      "weap_id": 13,
-      "name": "Magic Wall",
-      "img_url": "http://192.168.1.17:8000/images/13.gif"
-    },
-    {
-      "weap_id": 15,
-      "name": "Zapper",
-      "img_url": "http://192.168.1.17:8000/images/15.gif"
-    },
-    {
-      "weap_id": 16,
-      "name": "Napalm",
-      "img_url": "http://192.168.1.17:8000/images/16.gif"
-    },
-    {
-      "weap_id": 17,
-      "name": "Hail Storm",
-      "img_url": "http://192.168.1.17:8000/images/17.gif"
-    },
-    {
-      "weap_id": 18,
-      "name": "Ground Hog",
-      "img_url": "http://192.168.1.17:8000/images/18.gif"
-    },
-    {
-      "weap_id": 19,
-      "name": "Worm",
-      "img_url": "http://192.168.1.17:8000/images/19.gif"
-    },
-  ]
-}
 
 const StackDetail = (props) => {
   const classes = useStyles();
@@ -129,7 +67,7 @@ const StackDetail = (props) => {
       <div className={classes.container}>
       {displayPosts.map(item =>
             <Slide direction="up" in={true} timeout={800}>
-              <Card className={classes.card}>
+              <Card className={classes.card} raised={true}>
                 <CardMedia
                   className={classes.media}
                   image={item.img_url}

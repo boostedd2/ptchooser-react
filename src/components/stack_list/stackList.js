@@ -8,7 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
-import dummy from '../../dummy';
+import Loading from '../misc/loading';
 
 const useStyles = makeStyles({
   root: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   card: {
     flex: "20%",
     minWidth: "200px",
-    backgroundColor: "#212121",
+    backgroundColor: "#2e2e2e",
     marginLeft: "10px",
     marginRight: "10px",
     marginBottom: "20px",
@@ -62,9 +62,9 @@ const StackList = () => {
     <div className={classes.root}>
       <h1 style={{color: "white"}}>Stack Viewer</h1>
       <div className={classes.container}>
-        {displayPosts.map(item =>
+        {isLoading ? <div className={classes.loading}><Loading /></div> : displayPosts.map(item =>
           <Slide direction="up" in={true} timeout={800}>
-            <Card className={classes.card}>
+            <Card className={classes.card} raised={true}>
               <CardContent>
                 <h2 className={classes.title}>{item.name}</h2>
               </CardContent>
