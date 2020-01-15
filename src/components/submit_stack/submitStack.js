@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -25,6 +26,14 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     color: "white",
   },
+  titles: {
+    color: "white"
+  },
+  submitButton: {
+    color: "white",
+    background: "#b32eae",
+    padding: "16px"
+  },
   card: {
     flex: "20%",
     minWidth: "200px",
@@ -42,12 +51,15 @@ const useStyles = makeStyles(theme => ({
     marginTop: "20px",
     marginBottom: "-20px"
   },
-  title: {
+  cardTitle: {
     color: "white",
     textAlign: "center"
   },
-  desc: {
-    color: "white",
+  button: {
+    color:"red",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "-20px"
   },
   entryField: {
     marginBottom: "10px",
@@ -79,6 +91,7 @@ const CssTextField = withStyles({
 })(TextField);
 
 const SubmitStack = () => {
+  let history = useHistory()
   const classes = useStyles();
   const [displayWeapons, setDisplayWeapons] = useState([])
   const [disabledWeapons, setDisabledWeapons] = useState([])
@@ -113,6 +126,7 @@ const SubmitStack = () => {
       'http://192.168.1.17:8000/stacks', postData
     ).then(res => {
       console.log(res.data)
+      return history.push('/')
     })
   };
   
@@ -140,16 +154,16 @@ const SubmitStack = () => {
   
   return(
       <div className={classes.root}>
-        <h1 style={{color: "white"}}>Create Stack</h1>
-        <h3 style={{color: "white",}}>You can submit the the negative list too.</h3>
-        <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" defaultValue={stackName} onBlur={inputChange}/>
-        <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px"}} onClick={() => sendStack()}>Submit Weapon Stack</Button>
-        <p style={{color: "white"}}>Toggle Negative List</p>
+        <h1 className={classes.titles}>Create Stack</h1>
+        <h3 className={classes.titles}>You can submit the the negative list too.</h3>
+        <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" defaultValue={stackName} onBlur={inputChange} />
+        <Button className={classes.submitButton} size="small" onClick={() => sendStack()}>Submit Weapon Stack</Button>
+        <p className={classes.titles}>Toggle Negative List</p>
         <Switch
-        checked={state.checkedA}
-        onChange={handleChange('checkedA')}
-        value="checkedA"
-        inputProps={{ 'aria-label': 'secondary checkbox' }}
+          checked={state.checkedA}
+          onChange={handleChange('checkedA')}
+          value="checkedA"
+          inputProps={{ 'aria-label': 'secondary checkbox' }}
         />
         <span style={{color: "white",}}>{filtered().length} Weapons selected</span>
         <div className={classes.container}>
@@ -163,12 +177,12 @@ const SubmitStack = () => {
                   title={item.name}
                 />
                 <CardContent>
-                  <h2 className={classes.title}>{item.name}</h2>
+                  <h2 className={classes.cardTitle}>{item.name}</h2>
                 </CardContent>
                 <CardActions>
                   {filtered() !== disabledWeapons ? 
-                    <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Disable</Button> :
-                    <Button size="small" style= {{color:"red", marginLeft: "auto", marginRight: "auto", marginTop: "-20px"}} onClick={() => onDisable(item.weap_id)}>Enable</Button>}
+                    <Button size="small" className={classes.button} onClick={() => onDisable(item.weap_id)}>Disable</Button> :
+                    <Button size="small" className={classes.button} onClick={() => onDisable(item.weap_id)}>Enable</Button>}
                 </CardActions>
               </Card>
             </Slide>

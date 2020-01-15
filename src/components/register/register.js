@@ -21,6 +21,12 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "10px",
     background: "grey",
   },
+  submitButton: {
+    color:"white",
+    background: "#b32eae",
+    padding: "16px",
+    width: "80px"
+  }
 }));
 
 const CssTextField = withStyles({
@@ -57,7 +63,7 @@ const Register = () => {
         <CssTextField className={classes.entryField} id="filled-basic" label="Username" variant="filled" />
         <CssTextField className={classes.entryField} id="filled-basic" label="Create Password" variant="filled" />
         <CssTextField className={classes.entryField} id="filled-basic" label="Confirm Password" variant="filled" />
-        <Button size="small" style= {{color:"white", background: "#b32eae", padding: "16px", width: "80px"}}>Submit</Button>
+        <Button className={classes.submitButton} size="small">Submit</Button>
         </form>
       </div>}
     </div>
