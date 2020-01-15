@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,6 +48,32 @@ const CssTextField = withStyles({
 })(TextField);
 
 const Login = () => {
+  let history = useHistory()
+  const [userName, setUserName] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+
+  const inputChangeUser= function(event) {
+    setUserName(event.target.value);
+  }
+  
+  const inputChangePassword= function(event) {
+    setUserPassword(event.target.value);
+  }
+
+  const submitLogin = () => {
+    const postData = {
+      "username": userName,
+      "password": userPassword
+    }
+    axios.post(
+      'http://192.168.1.17:8000/users/login', postData
+    ).then(res => {
+      sessionStorage.setItem('jwtToken', res.data);
+      console.log(sessionStorage.getItem('jwtToken'))
+      return history.push('/')
+    })
+  }
+
   const classes = useStyles();
   return(
     <div className={classes.root}>
@@ -57,9 +85,14 @@ const Login = () => {
         className={classes.entryField}
         id="filled-basic"
         label="Username"
-        variant="filled" />
-      <CssTextField className={classes.entryField} id="filled-basic" label="Password" variant="filled" />
-      <Button className={classes.submitButton} size="small">Login</Button>
+        variant="filled"
+        onChange={inputChangeUser} />
+      <CssTextField className={classes.entryField}
+        id="filled-basic"
+        label="Password"
+        variant="filled"
+        onChange={inputChangePassword} />
+      <Button className={classes.submitButton} size="small" onClick={submitLogin}>Login</Button>
       </form>
     </div>
   )

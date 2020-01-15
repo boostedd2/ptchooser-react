@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: "40px",
     marginLeft: "auto",
     marginRight: "auto"
-  }
+  },
 }));
 
 const CssTextField = withStyles({
@@ -118,16 +118,23 @@ const SubmitStack = () => {
   }, []);
 
   const sendStack = () => {
-    const postData = {
-      "name": stackName,
-      "weapons": filtered()
+    if (sessionStorage.getItem('jwtToken')) {
+      const postData = {
+        "name": stackName,
+        "weapons": filtered()
+      }
+      axios.post(
+        'http://192.168.1.17:8000/stacks', postData,
+        { headers: {"auth-token": sessionStorage.getItem('jwtToken') }}
+      ).then(res => {
+        return history.push('/')
+      })
+    } else {
+      console.log('ACCESS DENIED')
+      document.getElementById("error").style.display = "block"
+      setTimeout(function(){ document.getElementById("error").style.display = "none" }, 3000);
+      
     }
-    axios.post(
-      'http://192.168.1.17:8000/stacks', postData
-    ).then(res => {
-      console.log(res.data)
-      return history.push('/')
-    })
   };
   
 
@@ -156,6 +163,7 @@ const SubmitStack = () => {
       <div className={classes.root}>
         <h1 className={classes.titles}>Create Stack</h1>
         <h3 className={classes.titles}>You can submit the the negative list too.</h3>
+        <h3 id="error" style={{color: "red", display: "none"}}>You must be logged in to submit a stack!</h3>
         <CssTextField className={classes.entryField} id="filled-basic" label="Stack Name" variant="filled" defaultValue={stackName} onBlur={inputChange} />
         <Button className={classes.submitButton} size="small" onClick={() => sendStack()}>Submit Weapon Stack</Button>
         <p className={classes.titles}>Toggle Negative List</p>
