@@ -108,7 +108,7 @@ const SubmitStack = () => {
   useEffect(() => {
     const fetchData = () => {
       axios.get(
-        'http://192.168.1.17:8000/weapons'
+        'https://www.hdjfygr.xyz/weapons'
       ).then(res => {
         setDisplayWeapons(res.data)
         setIsLoading(false)
@@ -124,7 +124,7 @@ const SubmitStack = () => {
         "weapons": filtered()
       }
       axios.post(
-        'http://192.168.1.17:8000/stacks', postData,
+        'https://www.hdjfygr.xyz/stacks', postData,
         { headers: {"auth-token": sessionStorage.getItem('jwtToken') }}
       ).then(res => {
         return history.push('/')

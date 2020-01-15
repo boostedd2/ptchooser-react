@@ -54,7 +54,7 @@ const StackList = () => {
   useEffect(() => {
     const fetchData = () => {
       axios.get(
-        'http://192.168.1.17:8000/stacks'
+        'https://www.hdjfygr.xyz/stacks'
       ).then(res => {
         setDisplayPosts(res.data)
         setIsLoading(false)

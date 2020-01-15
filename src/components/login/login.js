@@ -66,7 +66,7 @@ const Login = () => {
       "password": userPassword
     }
     axios.post(
-      'http://192.168.1.17:8000/users/login', postData
+      'https://www.hdjfygr.xyz/users/login', postData
     ).then(res => {
       sessionStorage.setItem('jwtToken', res.data);
       console.log(sessionStorage.getItem('jwtToken'))
