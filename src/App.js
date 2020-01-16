@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar userLoggedIn={userLoggedIn} />
+        <Navbar userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
         <Switch>
           <Route exact path="/" component={StackList} />
           <Route path="/stacks/:detail" component={StackDetail} />
