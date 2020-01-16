@@ -103,6 +103,7 @@ const Login = ({userLoggedIn, setUserLoggedIn}) => {
         onChange={inputChangeUser} />
       <CssTextField className={classes.entryField}
         id="filled-basic"
+        type="password"
         label="Password"
         variant="filled"
         onChange={inputChangePassword} />
