@@ -57,7 +57,7 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-const Login = () => {
+const Login = ({userLoggedIn, setUserLoggedIn}) => {
   let history = useHistory()
   const [userName, setUserName] = useState('')
   const [userPassword, setUserPassword] = useState('')
@@ -80,6 +80,7 @@ const Login = () => {
     ).then(res => {
       sessionStorage.setItem('jwtToken', res.data);
       console.log(sessionStorage.getItem('jwtToken'))
+      setUserLoggedIn(true)
       return history.push('/')
     })
   }

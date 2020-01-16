@@ -20,10 +20,13 @@ const useStyles = makeStyles(theme => ({
       outline: 0
     }
   },
-
+  status: {
+    marginLeft: "auto",
+    marginRight: "10px"
+  }
 }));
 
-const Navbar = () => {
+const Navbar = ({userLoggedIn}) => {
   const classes = useStyles();
 
   return(
@@ -32,6 +35,7 @@ const Navbar = () => {
         <div className={classes.navbarItems}>
           <Navdrawer />
           <Link to="/" className={classes.home}><h2>PocketStacks</h2></Link>
+          {userLoggedIn ? <div className={classes.status}>Logout</div> : <div></div>}
         </div>
       </AppBar>
     </div>
