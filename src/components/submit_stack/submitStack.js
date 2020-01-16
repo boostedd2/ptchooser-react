@@ -12,6 +12,15 @@ import Slide from '@material-ui/core/Slide';
 import Switch from '@material-ui/core/Switch';
 import Loading from '../misc/loading';
 
+const dev = true
+let url
+
+if (dev === false) {
+  url = "https://www.hdjfygr.xyz"
+} else {
+  url = "http://192.168.1.17:8000"
+}
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "90%",
@@ -108,7 +117,7 @@ const SubmitStack = () => {
   useEffect(() => {
     const fetchData = () => {
       axios.get(
-        'https://www.hdjfygr.xyz/weapons'
+        url + '/weapons'
       ).then(res => {
         setDisplayWeapons(res.data)
         setIsLoading(false)
@@ -124,7 +133,7 @@ const SubmitStack = () => {
         "weapons": filtered()
       }
       axios.post(
-        'https://www.hdjfygr.xyz/stacks', postData,
+        url + '/stacks', postData,
         { headers: {"auth-token": sessionStorage.getItem('jwtToken') }}
       ).then(res => {
         return history.push('/')

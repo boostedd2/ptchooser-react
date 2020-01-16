@@ -7,6 +7,15 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Slide from '@material-ui/core/Slide';
 import Loading from '../misc/loading';
 
+const dev = true
+let url
+
+if (dev === false) {
+  url = "https://www.hdjfygr.xyz"
+} else {
+  url = "http://192.168.1.17:8000"
+}
+
 const useStyles = makeStyles({
   root: {
     width: "90%",
@@ -57,7 +66,7 @@ const StackDetail = (props) => {
   useEffect(() => {
     const fetchData = () => {
       axios.get(
-        'https://www.hdjfygr.xyz/stacks/' + props.match.params.detail
+        url + '/stacks/' + props.match.params.detail
       ).then(res => {
         setDisplayPosts(res.data.weapons)
         setDescription(res.data)
