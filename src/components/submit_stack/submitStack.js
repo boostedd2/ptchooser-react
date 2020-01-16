@@ -12,6 +12,7 @@ import Slide from '@material-ui/core/Slide';
 import Switch from '@material-ui/core/Switch';
 import Loading from '../misc/loading';
 
+//dev toggle
 const dev = true
 let url
 
@@ -114,6 +115,7 @@ const SubmitStack = () => {
     setState({ ...state, [name]: event.target.checked });
   };
 
+  //grab weapons list
   useEffect(() => {
     const fetchData = () => {
       axios.get(
@@ -126,23 +128,35 @@ const SubmitStack = () => {
     fetchData();
   }, []);
 
+  // if logged in send the stack to the server
   const sendStack = () => {
+    let errMessage
     if (sessionStorage.getItem('jwtToken')) {
-      const postData = {
-        "name": stackName,
-        "weapons": filtered()
+      if (filtered().length < 30) {
+        alert('Please Select at least 30 weapons')
+      } else {
+        const postData = {
+          "name": stackName,
+          "weapons": filtered()
+        }
+        axios.post(
+          url + '/stacks', postData,
+          { headers: {"auth-token": sessionStorage.getItem('jwtToken') }}
+        )
+        .then(res => {
+          return history.push('/')
+        })
+        .catch(res => {
+          errMessage = res.response.data
+          document.getElementById("error").innerHTML = errMessage
+          document.getElementById("error").style.display = "block"
+          setTimeout(function(){ document.getElementById("error").style.display = "none" }, 3000);
+        })
       }
-      axios.post(
-        url + '/stacks', postData,
-        { headers: {"auth-token": sessionStorage.getItem('jwtToken') }}
-      ).then(res => {
-        return history.push('/')
-      })
     } else {
       console.log('ACCESS DENIED')
       document.getElementById("error").style.display = "block"
       setTimeout(function(){ document.getElementById("error").style.display = "none" }, 3000);
-      
     }
   };
   
@@ -156,6 +170,7 @@ const SubmitStack = () => {
     setDisplayWeapons(updatedList)
   }
 
+  // filter the list on negative toggle list
   const filtered = () => {
     if (state.checkedA === true) {
       return disabledWeapons.sort(function(a, b){return a.weap_id - b.weap_id});

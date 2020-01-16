@@ -5,6 +5,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom'
 
+//dev toggle
+const dev = true
+let url
+
+if (dev === false) {
+  url = "https://www.hdjfygr.xyz"
+} else {
+  url = "http://192.168.1.17:8000"
+}
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "90%",
@@ -66,7 +76,7 @@ const Login = () => {
       "password": userPassword
     }
     axios.post(
-      'https://www.hdjfygr.xyz/users/login', postData
+      url + '/users/login', postData
     ).then(res => {
       sessionStorage.setItem('jwtToken', res.data);
       console.log(sessionStorage.getItem('jwtToken'))
