@@ -78,10 +78,10 @@ const StackDetail = (props) => {
 
   return(
     <div className={classes.root}>
-      <h1>{description.name}</h1>
+      <h1>{description.name} {displayPosts.length !== 0 ? `(${displayPosts.length.toString()} Weapons)` : ""}</h1>
       <div className={classes.container}>
       {isLoading ?
-      <div className={classes.loading}><Loading /></div> : displayPosts.map(item =>
+      <div className={classes.loading}><Loading /></div> :  displayPosts.map(item =>
             <Slide direction="up" in={true} timeout={800}>
               <Card className={classes.card} raised={true}>
                 <CardMedia
