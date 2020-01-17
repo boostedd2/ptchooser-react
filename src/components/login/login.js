@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom'
 
 //dev toggle
-const dev = true
+const dev = false
 let url
 
 if (dev === false) {
