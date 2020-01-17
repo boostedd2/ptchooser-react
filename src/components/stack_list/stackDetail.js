@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Slide from '@material-ui/core/Slide';
 import Loading from '../misc/loading';
 
-const dev = false
+const dev = true
 let url
 
 if (dev === false) {

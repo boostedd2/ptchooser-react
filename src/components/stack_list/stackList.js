@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 import Loading from '../misc/loading';
 
-const dev = false
+const dev = true
 let url
 
 if (dev === false) {
@@ -82,6 +82,12 @@ const StackList = () => {
             <Card className={classes.card} raised={true}>
               <CardContent>
                 <h2 className={classes.title}>{item.name}</h2>
+                <img src={item.weapons[0].img_url} alt="" width="30px"/>
+                <img src={item.weapons[1].img_url} alt="" width="30px"/>
+                <img src={item.weapons[2].img_url} alt="" width="30px"/>
+                <img src={item.weapons[3].img_url} alt="" width="30px"/>
+                <img src={item.weapons[4].img_url} alt="" width="30px"/>
+                <span style={{color: "white"}}> + {item.weapons.length - 5}</span>
               </CardContent>
               <CardActions>
                 <Button component={Link} to={"stacks/" + slugify(item.slug)} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
