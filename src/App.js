@@ -11,6 +11,7 @@ import StackDetail from './components/stack_list/stackDetail';
 function App() {
 
   let logged
+  let user
 
   if (sessionStorage.getItem('jwtToken')) {
     logged = true
@@ -18,12 +19,19 @@ function App() {
     logged = false
   }
 
+  if (sessionStorage.getItem('user')) {
+    user = sessionStorage.getItem('user')
+  } else {
+    user = null
+  }
+
   const [userLoggedIn, setUserLoggedIn] = useState(logged)
+  const [userId, setUserId] = useState(user)
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
+        <Navbar userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} userId={userId} setUserId={setUserId} />
         <Switch>
           <Route exact path="/" component={StackList} />
           <Route path="/stacks/:detail" component={StackDetail} />
@@ -32,7 +40,7 @@ function App() {
           <Route 
             path='/login' 
             render={(props) => (
-              <Login {...props} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
+              <Login {...props} setUserLoggedIn={setUserLoggedIn} setUserId={setUserId} />
             )} 
           />
           <Route path="/register" component={Register} />

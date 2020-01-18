@@ -13,7 +13,7 @@ import Switch from '@material-ui/core/Switch';
 import Loading from '../misc/loading';
 
 //dev toggle
-const dev = false
+const dev = true
 let url
 
 if (dev === false) {

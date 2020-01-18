@@ -4,9 +4,10 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom'
+import jwt_decode from 'jwt-decode';
 
 //dev toggle
-const dev = false
+const dev = true
 let url
 
 if (dev === false) {
@@ -60,7 +61,7 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-const Login = ({userLoggedIn, setUserLoggedIn}) => {
+const Login = ({setUserLoggedIn, setUserId}) => {
   let history = useHistory()
   const [userName, setUserName] = useState('')
   const [userPassword, setUserPassword] = useState('')
@@ -82,7 +83,8 @@ const Login = ({userLoggedIn, setUserLoggedIn}) => {
       url + '/users/login', postData
     ).then(res => {
       sessionStorage.setItem('jwtToken', res.data);
-      console.log(sessionStorage.getItem('jwtToken'))
+      var decoded = jwt_decode(res.data)
+      sessionStorage.setItem('user', decoded.username)
       setUserLoggedIn(true)
       return history.push('/')
     })
