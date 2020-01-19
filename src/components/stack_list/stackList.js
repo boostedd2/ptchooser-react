@@ -88,6 +88,8 @@ const StackList = () => {
                 <img src={item.weapons[3].img_url} alt="" width="30px"/>
                 <img src={item.weapons[4].img_url} alt="" width="30px"/>
                 <span style={{color: "white"}}> + {item.weapons.length - 5}</span>
+                <p className={classes.title}>by {item.author}</p>
+                <p className={classes.title}>{item.date}</p>
               </CardContent>
               <CardActions>
                 <Button component={Link} to={"stacks/" + slugify(item.slug)} size="small" style= {{color:"white"}}>View Weapon Stack</Button>

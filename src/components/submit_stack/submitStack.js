@@ -100,7 +100,7 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-const SubmitStack = () => {
+const SubmitStack = ({userId}) => {
   let history = useHistory()
   const classes = useStyles();
   const [displayWeapons, setDisplayWeapons] = useState([])
@@ -114,6 +114,16 @@ const SubmitStack = () => {
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
+
+  const dateToday = () => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    
+    today = mm + '/' + dd + '/' + yyyy;
+    return today
+  }
 
   //grab weapons list
   useEffect(() => {
@@ -137,6 +147,8 @@ const SubmitStack = () => {
       } else {
         const postData = {
           "name": stackName,
+          "author": userId,
+          "date": dateToday(),
           "weapons": filtered()
         }
         axios.post(

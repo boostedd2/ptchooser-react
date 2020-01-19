@@ -79,6 +79,7 @@ const StackDetail = (props) => {
   return(
     <div className={classes.root}>
       <h1>{description.name} {displayPosts.length !== 0 ? `(${displayPosts.length.toString()} Weapons)` : ""}</h1>
+      <p>by {description.author}</p>
       <div className={classes.container}>
       {isLoading ?
       <div className={classes.loading}><Loading /></div> :  displayPosts.map(item =>

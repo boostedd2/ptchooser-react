@@ -61,6 +61,7 @@ const Navbar = ({userLoggedIn, setUserLoggedIn, userId, setUserId}) => {
     handleClose()
     sessionStorage.removeItem('jwtToken')
     setUserLoggedIn(false)
+    sessionStorage.removeItem('user')
   }
 
   const login = () => {

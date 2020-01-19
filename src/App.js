@@ -35,7 +35,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={StackList} />
           <Route path="/stacks/:detail" component={StackDetail} />
-          <Route path="/add" component={SubmitStack} />
+          <Route 
+            path='/add' 
+            render={(props) => (
+              <SubmitStack {...props} userId={userId} />
+            )} 
+          />
           <Route path="/about" component={About} />
           <Route 
             path='/login' 
