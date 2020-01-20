@@ -7,6 +7,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Slide from '@material-ui/core/Slide';
 import Loading from '../misc/loading';
 
+/* Detail view for stacklist items
+   Displays user submitted stack and is shared via url
+*/
+
 const dev = true
 let url
 
@@ -63,6 +67,7 @@ const StackDetail = (props) => {
   const [description, setDescription] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+  // grab requested weapon stack details
   useEffect(() => {
     const fetchData = () => {
       axios.get(

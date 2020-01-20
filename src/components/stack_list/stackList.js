@@ -10,6 +10,11 @@ import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 import Loading from '../misc/loading';
 
+/* Loads all of the user submitted weapon stacks
+   will include sorting and searching the stacklist
+   in future releases.
+*/
+
 const dev = true
 let url
 
@@ -60,12 +65,13 @@ const StackList = () => {
   const [displayPosts, setDisplayPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+  // Grab all user submitted stacks
   useEffect(() => {
     const fetchData = () => {
       axios.get(
         url + '/stacks'
       ).then(res => {
-        setDisplayPosts(res.data)
+        setDisplayPosts(res.data.reverse())
         setIsLoading(false)
       })
     };
@@ -92,7 +98,7 @@ const StackList = () => {
                 <p className={classes.title}>{item.date}</p>
               </CardContent>
               <CardActions>
-                <Button component={Link} to={"stacks/" + slugify(item.slug)} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
+                <Button component={Link} to={"stacks/" + slugify(item.slug).toLowerCase()} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
               </CardActions>
             </Card>
           </Slide>

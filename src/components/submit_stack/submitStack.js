@@ -12,6 +12,11 @@ import Slide from '@material-ui/core/Slide';
 import Switch from '@material-ui/core/Switch';
 import Loading from '../misc/loading';
 
+/* Logged in users can create stacks to submit and share to other players via a unique url
+   supports submitting the list of enabled weapons or the negative disabled list,
+   minimum is 30 items, must include unique title since the url slug is based on the title
+*/
+
 //dev toggle
 const dev = true
 let url
@@ -111,21 +116,25 @@ const SubmitStack = ({userId}) => {
     checkedA: false,
   });
 
+  // toggle switch state update logic
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
 
+
+  // todays date in *Jan. 1, 1970 format
   const dateToday = () => {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    
-    today = mm + '/' + dd + '/' + yyyy;
-    return today
+    var today = new Date()
+    const months = { 
+      1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 
+      5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 
+      9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'
+    }
+    var date = months[(today.getMonth()+1)]+'. '+today.getDate()+', '+today.getFullYear()
+    return date
   }
 
-  //grab weapons list
+  // fetch list of weapons to choose from
   useEffect(() => {
     const fetchData = () => {
       axios.get(
@@ -138,7 +147,8 @@ const SubmitStack = ({userId}) => {
     fetchData();
   }, []);
 
-  // if logged in send the stack to the server
+  // if logged in allow user to send the stack to the server
+  // includes associated error handling
   const sendStack = () => {
     let errMessage
     if (sessionStorage.getItem('jwtToken')) {
@@ -173,6 +183,7 @@ const SubmitStack = ({userId}) => {
   };
   
 
+  // disable weapons, adds to the negative list
   const onDisable = (id) => {
     const isNotId = item => item.weap_id !== id;
     const isId = item => item.weap_id === id
@@ -183,6 +194,7 @@ const SubmitStack = ({userId}) => {
   }
 
   // filter the list on negative toggle list
+  // view the disabled weapons
   const filtered = () => {
     if (state.checkedA === true) {
       return disabledWeapons.sort(function(a, b){return a.weap_id - b.weap_id});
@@ -191,6 +203,7 @@ const SubmitStack = ({userId}) => {
     }
   }
 
+ // user input for stack name
  const inputChange = function(event) {
     setStackName(event.target.value);
   }

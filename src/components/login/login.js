@@ -6,6 +6,11 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom'
 import jwt_decode from 'jwt-decode';
 
+/* Login page for the application, requires username and password. 
+   Data is sent over https and hashed by the server before storing to the database.
+   Successful login will redirect to '/'
+*/
+
 //dev toggle
 const dev = true
 let url
@@ -62,18 +67,21 @@ const CssTextField = withStyles({
 })(TextField);
 
 const Login = ({setUserLoggedIn, setUserId}) => {
+  const classes = useStyles();
   let history = useHistory()
   const [userName, setUserName] = useState('')
   const [userPassword, setUserPassword] = useState('')
 
-  const inputChangeUser= function(event) {
+  const inputChangeUser = function(event) {
     setUserName(event.target.value);
   }
   
-  const inputChangePassword= function(event) {
+  const inputChangePassword = function(event) {
     setUserPassword(event.target.value);
   }
 
+  // send POST request to back-end, attempting authentication
+  // success returns JWT which includes 'username' in the payload
   const submitLogin = () => {
     const postData = {
       "username": userName,
@@ -90,7 +98,6 @@ const Login = ({setUserLoggedIn, setUserId}) => {
     })
   }
 
-  const classes = useStyles();
   return(
     <div className={classes.root}>
       <h1>Login</h1>

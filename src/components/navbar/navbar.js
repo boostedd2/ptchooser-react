@@ -84,7 +84,7 @@ const Navbar = ({userLoggedIn, setUserLoggedIn, userId, setUserId}) => {
           <Link to="/" className={classes.home}><h2>PocketStacks</h2></Link>
           {userLoggedIn ? 
             <div className={classes.logoutInfo}>
-              <Button className={classes.status} onClick={handleClick}><AccountCircleIcon className={classes.userIcon} />{userId}</Button>
+              <Button className={classes.status} onClick={handleClick}><AccountCircleIcon className={classes.userIcon} />{sessionStorage.getItem('user')}</Button>
               <Menu
                 className={classes.userMenu}
                 classes={{ paper: classes.paper }}
