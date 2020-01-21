@@ -51,6 +51,10 @@ const useStyles = makeStyles({
   desc: {
     color: "white",
   },
+  votes: {
+    display: "flex",
+    color: "white"
+  },
   loading: {
     marginTop: "40px",
     marginLeft: "auto",
@@ -96,9 +100,14 @@ const StackList = () => {
                 <span style={{color: "white"}}> + {item.weapons.length - 5}</span>
                 <p className={classes.title}>by {item.author}</p>
                 <p className={classes.title}>{item.date}</p>
+                <div className={classes.votes}>
+                  <Button style={{color:"white"}}>-</Button>
+                  <p className={classes.title}>{item.votes}</p>
+                  <Button style={{color:"white"}}>+</Button>
+                </div>
               </CardContent>
               <CardActions>
-                <Button component={Link} to={"stacks/" + slugify(item.slug).toLowerCase()} size="small" style= {{color:"white"}}>View Weapon Stack</Button>
+                <Button component={Link} to={"stacks/" + slugify(item.slug).toLowerCase()} size="small" style={{color:"white"}}>View Weapon Stack</Button>
               </CardActions>
             </Card>
           </Slide>
