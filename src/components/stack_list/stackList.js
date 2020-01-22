@@ -81,6 +81,28 @@ const StackList = () => {
     };
     fetchData();
   }, []);
+
+  const castVote = (item, choice) => {
+    let errMessage
+    const putData = {
+      "name": item.name,
+      "vote": choice,
+      "username": sessionStorage.getItem('user')
+    }
+    axios.put(
+      url + '/stacks', item.name,
+      { headers: {"auth-token": sessionStorage.getItem('jwtToken') }}
+    )
+    .then(res => {
+      //return history.push('/')
+    })
+    .catch(res => {
+      errMessage = res.response.data
+      document.getElementById("error").innerHTML = errMessage
+      document.getElementById("error").style.display = "block"
+      setTimeout(function(){ document.getElementById("error").style.display = "none" }, 3000);
+    })
+  } 
   
 
   return(

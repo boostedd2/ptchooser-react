@@ -157,7 +157,7 @@ const SubmitStack = ({userId}) => {
       } else {
         const postData = {
           "name": stackName,
-          "author": userId,
+          "author": sessionStorage.getItem('user'),
           "date": dateToday(),
           "weapons": filtered()
         }
