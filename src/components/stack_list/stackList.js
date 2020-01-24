@@ -88,15 +88,19 @@ const StackList = () => {
   const castVote = (item, choice) => {
     let errMessage
     const putData = {
-      "name": item.name,
-      "vote": choice,
-      "username": sessionStorage.getItem('user')
+      "name": item,
+      "username": sessionStorage.getItem('user'),
+      "choice": choice,
     }
     axios.put(
-      url + '/stacks', item.name,
+      url + '/stacks/first', putData,
       { headers: {"auth-token": sessionStorage.getItem('jwtToken') }}
     )
     .then(res => {
+      errMessage = res.data
+      document.getElementById("error").innerHTML = errMessage
+      document.getElementById("error").style.display = "block"
+      setTimeout(function(){ document.getElementById("error").style.display = "none" }, 3000);
       //return history.push('/')
     })
     .catch(res => {
@@ -111,6 +115,7 @@ const StackList = () => {
   return(
     <div className={classes.root}>
       <h1 style={{color: "white"}}>Stack Viewer</h1>
+      <h3 id="error" style={{color: "red", display: "none"}}>You must be logged in to submit a stack!</h3>
       <div className={classes.container}>
         {isLoading ? <div className={classes.loading}><Loading /></div> : displayPosts.map(item =>
           <Slide direction="up" in={true} timeout={800}>
@@ -126,9 +131,9 @@ const StackList = () => {
                 <p className={classes.title}>by {item.author}</p>
                 <p className={classes.title}>{item.date}</p>
                 <div className={classes.votes}>
-                  <Button style={{color:"white"}}><ThumbDownIcon /></Button>
+                  <Button style={{color:"white"}} onClick={() => castVote(item.name, "down")}><ThumbDownIcon /></Button>
                   <p className={classes.title}>{item.votes}</p>
-                  <Button style={{color:"white"}}><ThumbUpIcon /></Button>
+                  <Button style={{color:"white"}} onClick={() => castVote(item.name, "up")}><ThumbUpIcon /></Button>
                 </div>
               </CardContent>
               <CardActions>
