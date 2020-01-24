@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 import Loading from '../misc/loading';
@@ -53,7 +55,8 @@ const useStyles = makeStyles({
   },
   votes: {
     display: "flex",
-    color: "white"
+    color: "white",
+    marginLeft: "-20px"
   },
   loading: {
     marginTop: "40px",
@@ -123,9 +126,9 @@ const StackList = () => {
                 <p className={classes.title}>by {item.author}</p>
                 <p className={classes.title}>{item.date}</p>
                 <div className={classes.votes}>
-                  <Button style={{color:"white"}}>-</Button>
+                  <Button style={{color:"white"}}><ThumbDownIcon /></Button>
                   <p className={classes.title}>{item.votes}</p>
-                  <Button style={{color:"white"}}>+</Button>
+                  <Button style={{color:"white"}}><ThumbUpIcon /></Button>
                 </div>
               </CardContent>
               <CardActions>
