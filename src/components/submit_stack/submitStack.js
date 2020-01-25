@@ -12,6 +12,13 @@ import Slide from '@material-ui/core/Slide';
 import Switch from '@material-ui/core/Switch';
 import Loading from '../misc/loading';
 
+//input sanitize
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window);
+
 /* Logged in users can create stacks to submit and share to other players via a unique url
    supports submitting the list of enabled weapons or the negative disabled list,
    minimum is 30 items, must include unique title since the url slug is based on the title
@@ -156,10 +163,10 @@ const SubmitStack = ({userId}) => {
         alert('Please Select at least 30 weapons')
       } else {
         const postData = {
-          "name": stackName,
-          "author": sessionStorage.getItem('user'),
-          "date": dateToday(),
-          "weapons": filtered()
+          "name": DOMPurify.sanitize(stackName),
+          "author": DOMPurify.sanitize(sessionStorage.getItem('user')),
+          "date": DOMPurify.sanitize(dateToday()),
+          "weapons": DOMPurify.sanitize(filtered())
         }
         axios.post(
           url + '/stacks', postData,

@@ -6,6 +6,13 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom'
 import jwt_decode from 'jwt-decode';
 
+//input sanitize
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window);
+
 /* Login page for the application, requires username and password. 
    Data is sent over https and hashed by the server before storing to the database.
    Successful login will redirect to '/'
@@ -85,8 +92,8 @@ const Login = ({setUserLoggedIn, setUserId}) => {
   const submitLogin = (e) => {
     e.preventDefault()
     const postData = {
-      "username": userName,
-      "password": userPassword
+      "username": DOMPurify.sanitize(userName),
+      "password": DOMPurify.sanitize(userPassword)
     }
     axios.post(
       url + '/users/login', postData
@@ -111,7 +118,7 @@ const Login = ({setUserLoggedIn, setUserId}) => {
       <h1>Login</h1>
       <h3>You must be logged in to create Stacks.</h3>
       <h3>NOTE: An account is not needed to view weapon stacks.</h3>
-      <h3 id="error" style={{color: "red", display: "none"}}></h3>
+      <h3 id="error" style={{color: "red", display: "none"}}>.</h3>
       <form className={classes.registerForm}>
       <CssTextField
         className={classes.entryField}
