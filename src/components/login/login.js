@@ -82,19 +82,27 @@ const Login = ({setUserLoggedIn, setUserId}) => {
 
   // send POST request to back-end, attempting authentication
   // success returns JWT which includes 'username' in the payload
-  const submitLogin = () => {
+  const submitLogin = (e) => {
+    e.preventDefault()
     const postData = {
       "username": userName,
       "password": userPassword
     }
     axios.post(
       url + '/users/login', postData
-    ).then(res => {
+    )
+    .then(res => {
       sessionStorage.setItem('jwtToken', res.data);
       var decoded = jwt_decode(res.data)
       sessionStorage.setItem('user', decoded.username)
       setUserLoggedIn(true)
       return history.push('/')
+    })
+    .catch(err => {
+      const errMessage = err.response.data
+      document.getElementById("error").innerHTML = errMessage
+      document.getElementById("error").style.display = "block"
+      setTimeout(function(){ document.getElementById("error").style.display = "none" }, 3000);
     })
   }
 
@@ -103,6 +111,7 @@ const Login = ({setUserLoggedIn, setUserId}) => {
       <h1>Login</h1>
       <h3>You must be logged in to create Stacks.</h3>
       <h3>NOTE: An account is not needed to view weapon stacks.</h3>
+      <h3 id="error" style={{color: "red", display: "none"}}></h3>
       <form className={classes.registerForm}>
       <CssTextField
         className={classes.entryField}
@@ -116,7 +125,7 @@ const Login = ({setUserLoggedIn, setUserId}) => {
         label="Password"
         variant="filled"
         onChange={inputChangePassword} />
-      <Button className={classes.submitButton} size="small" onClick={submitLogin}>Login</Button>
+      <Button type="submit" className={classes.submitButton} size="small" onClick={submitLogin}>Login</Button>
       </form>
     </div>
   )
