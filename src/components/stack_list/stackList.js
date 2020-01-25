@@ -12,6 +12,13 @@ import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 import Loading from '../misc/loading';
 
+//input sanitize
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window);
+
 /* Loads all of the user submitted weapon stacks
    will include sorting and searching the stacklist
    in future releases.
@@ -88,9 +95,9 @@ const StackList = () => {
   const castVote = (item, choice) => {
     let errMessage
     const putData = {
-      "name": item,
-      "username": sessionStorage.getItem('user'),
-      "choice": choice,
+      "name": DOMPurify.sanitize(item),
+      "username": DOMPurify.sanitize(sessionStorage.getItem('user')),
+      "choice": DOMPurify.sanitize(choice),
     }
     axios.put(
       url + '/stacks/first', putData,
