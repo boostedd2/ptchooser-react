@@ -7,6 +7,7 @@ import About from './components/about/about'
 import Login from './components/login/login'
 import Register from './components/register/register'
 import StackDetail from './components/stack_list/stackDetail';
+import Manage from './components/misc/manage';
 
 function App() {
 
@@ -46,9 +47,15 @@ function App() {
             path='/login' 
             render={(props) => (
               <Login {...props} setUserLoggedIn={setUserLoggedIn} setUserId={setUserId} />
-            )} 
+            )}
           />
           <Route path="/register" component={Register} />
+          <Route 
+            path='/manage' 
+            render={(props) => (
+              <Manage {...props} setUserLoggedIn={setUserLoggedIn} setUserId={setUserId} />
+            )}
+          />
         </Switch>
       </BrowserRouter>
     </div>
