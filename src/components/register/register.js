@@ -89,7 +89,8 @@ const Register = () => {
     setConfirmUserPassword(event.target.value);
   }
 
-  const registerSubmit = () => {
+  const registerSubmit = (e) => {
+    e.preventDefault()
     if (confirmUserPassword === createUserPassword) {
       const postData = {
         "username": DOMPurify.sanitize(createUserName),
@@ -128,7 +129,7 @@ const Register = () => {
           <CssTextField className={classes.entryField} id="filled-basic" label="Username" variant="filled" onChange={inputCreateUser} />
           <CssTextField className={classes.entryField} id="filled-basic" label="Create Password" variant="filled" type="password" onChange={inputCreateUserPassword} />
           <CssTextField className={classes.entryField} id="filled-basic" label="Confirm Password" variant="filled" type="password" onChange={inputConfirmUserPassword} />
-          <Button className={classes.submitButton} size="small" onClick={() => registerSubmit()}>Submit</Button>
+          <Button className={classes.submitButton} size="small" onClick={registerSubmit}>Submit</Button>
         </form>
       </div>}
     </div>
