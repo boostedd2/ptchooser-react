@@ -15,7 +15,7 @@ const DOMPurify = createDOMPurify(window);
 //before allowing any changes to be done, only allows disable/enable of accounts
 
 //dev toggle
-const dev = true
+const dev = false
 let url
 
 if (dev === false) {

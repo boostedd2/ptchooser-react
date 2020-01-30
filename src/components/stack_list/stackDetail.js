@@ -11,7 +11,7 @@ import Loading from '../misc/loading';
    Displays user submitted stack and is shared via url
 */
 
-const dev = true
+const dev = false
 let url
 
 if (dev === false) {

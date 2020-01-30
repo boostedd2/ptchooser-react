@@ -25,7 +25,7 @@ const DOMPurify = createDOMPurify(window);
 */
 
 //dev toggle
-const dev = true
+const dev = false
 let url
 
 if (dev === false) {
