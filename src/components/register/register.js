@@ -123,7 +123,7 @@ const Register = () => {
       {closedbeta ? <div className={classes.loading}><ClosedBeta /></div> :
       <div>
         <h3>All sign ups must be approved, a moderator will review your account for approval and notify you usually within 48 hours.</h3>
-        <h3>NOTE: An account is not needed to view weapon stacks.</h3>
+        <h3>NOTE: An account is not needed to view or share weapon stacks.</h3>
         <h3 id="error" style={{color: "red", display: "none"}}>.</h3>
         <form className={classes.registerForm}>
           <CssTextField className={classes.entryField} id="filled-basic" label="Username" variant="filled" onChange={inputCreateUser} />

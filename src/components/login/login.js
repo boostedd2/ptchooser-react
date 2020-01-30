@@ -117,7 +117,7 @@ const Login = ({setUserLoggedIn, setUserId}) => {
     <div className={classes.root}>
       <h1>Login</h1>
       <h3>You must be logged in to create Stacks.</h3>
-      <h3>NOTE: An account is not needed to view weapon stacks.</h3>
+      <h3>NOTE: An account is not needed to view or share weapon stacks.</h3>
       <h3 id="error" style={{color: "red", display: "none"}}>.</h3>
       <form className={classes.registerForm}>
       <CssTextField

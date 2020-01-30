@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import bitwiselogo from '../misc/assets/miniblitwise.gif';
+import ptlogo from '../misc/assets/miniptlogo.gif';
 
 const useStyles = makeStyles({
   root: {
@@ -8,7 +10,14 @@ const useStyles = makeStyles({
     marginRight: "auto",
     marginTop: "80px",
     color: "white",
-  }
+  },
+  logo_container: {
+    display: "flex",
+    width: "100%",
+    margin: "auto",
+    alignContent: "center",
+    alignItems: "center",
+  },
 });
 
 const About = () => {
@@ -28,6 +37,17 @@ const About = () => {
       <p></p>
       <p>I have been playing in tournaments with a group of fans called the PTUT group. Pocket Tanks Ultimate Tournaments has been fun, and provides a way to interact with players since there is no in-game communication.</p>
       <p>PocketStacks was created to make arranging allowed move sets easier and more uniform for everyone, all moves are in order as they appear in-game, and provide an image to make it easier to identify and manage.</p>
+      <br />
+      <h4>Disclaimer:</h4>
+      <p>All icons, weapon names, and Pocket Tanks assets are not owned or created by me, they are property of BlitWise Productions LLC.</p>
+      <p>This application was created as a fan project for other players to use if they wish.</p>
+      <div>
+        <div className={classes.logo_container}>
+          <a style={{marginRight: "20px"}} href="http://www.blitwise.com/ptanks.html"><img src={ptlogo} width="auto" height="80px" /></a>
+          <a href="http://www.blitwise.com/" ><img src={bitwiselogo} width="auto" height="40px" /></a>
+        </div>
+      </div>
+      <br />
     </div>
   )
 }

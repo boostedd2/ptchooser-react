@@ -200,13 +200,23 @@ const SubmitStack = ({userId}) => {
     setDisplayWeapons(updatedList)
   }
 
+  //enable weapons, adds to the enabled list
+  const onEnable = (id) => {
+    const isNotId = item => item.weap_id !== id;
+    const isId = item => item.weap_id === id
+    const updatedList = disabledWeapons.filter(isNotId);
+    const disabledItem = disabledWeapons.filter(isId)[0];
+    setDisabledWeapons(updatedList);
+    setDisplayWeapons([...displayWeapons, disabledItem])
+  }
+
   // filter the list on negative toggle list
   // view the disabled weapons
   const filtered = () => {
     if (state.checkedA === true) {
       return disabledWeapons.sort(function(a, b){return a.weap_id - b.weap_id});
     } else {
-      return displayWeapons
+      return displayWeapons.sort(function(a, b){return a.weap_id - b.weap_id});
     }
   }
 
@@ -246,7 +256,7 @@ const SubmitStack = ({userId}) => {
                 <CardActions>
                   {filtered() !== disabledWeapons ? 
                     <Button size="small" className={classes.button} onClick={() => onDisable(item.weap_id)}>Disable</Button> :
-                    <Button size="small" className={classes.button} onClick={() => onDisable(item.weap_id)}>Enable</Button>}
+                    <Button size="small" className={classes.button} onClick={() => onEnable(item.weap_id)}>Enable</Button>}
                 </CardActions>
               </Card>
             </Slide>
