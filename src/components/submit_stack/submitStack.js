@@ -166,7 +166,7 @@ const SubmitStack = ({userId}) => {
           "name": DOMPurify.sanitize(stackName),
           "author": DOMPurify.sanitize(sessionStorage.getItem('user')),
           "date": DOMPurify.sanitize(dateToday()),
-          "weapons": DOMPurify.sanitize(filtered())
+          "weapons": filtered()
         }
         axios.post(
           url + '/stacks', postData,
